@@ -2,7 +2,6 @@ var API = 'https://app-fe0cdbe7-3c23-4751-866f-cec4a14eeeb2.cleverapps.io/API'
 
 $(document).ready(function(){
 
-
   $.ajax({
 	  url: API+ '/stock/ListAll',
     type: 'get',
@@ -31,7 +30,6 @@ $(document).ready(function(){
                       </button>
                     </td>`;
       }
-      console.log(html)
       document.getElementById("table_data").innerHTML = html;
     },
     error : function(){
@@ -58,6 +56,8 @@ $(document).ready(function(){
   $("#btn-modal-footer-copy-img").click(function(){
     var url = $(this).val();
     console.log(url)
+    $('.toast').toast({delay: 2000});
+    $('.toast').toast('show');
     copyImage(url)
     
   })
@@ -109,9 +109,12 @@ function imageToBlob(imageURL) {
 }
 
 async function copyImage(imageURL){
+
   const blob = await imageToBlob(imageURL)
   const item = new ClipboardItem({ "image/png": blob });
   navigator.clipboard.write([item]);
+
+  
 }
 
 
