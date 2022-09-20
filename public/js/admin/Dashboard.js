@@ -21,7 +21,7 @@ $(document).ready(function(){
                     `<td>` + stocks[i].type_description + `</td>` +
                     `<td> ₱` + stocks[i].current_price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + `</td>` +
                     `<td>` + formatDate2(stocks[i].current_price_last_updated_date) + `</td>` +
-                    `<td>` + stocks[i].remaks + `</td>`+
+                    `<td>` + stocks[i].remarks + `</td>`+
                     `<td style="text-align:center">
                       <button type="button" id=`+stocks[i].id+`|`+stocks[i].added_date+` class="btn btn-secondary btn-gen-qr" data-toggle="tooltip" data-placement="top" title="Generate QR">
                         <span class="material-symbols-outlined">
