@@ -1,4 +1,4 @@
-var API = 'http://app-5609cb46-7bb7-4ea3-9258-b20b3bf65b1a.cleverapps.io/API'
+var API = 'https://app-5609cb46-7bb7-4ea3-9258-b20b3bf65b1a.cleverapps.io/API'
 
 $(document).ready(function(){
 
