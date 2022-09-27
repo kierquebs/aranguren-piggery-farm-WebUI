@@ -10,18 +10,16 @@ $(document).ready(function(){
       var stocks = JSON.parse(JSON.stringify(req));
       var html = "";
       for (let i = 0; i < stocks.length; i++) {
+
         html += `<tr>`+
+                    `<td>` + stocks[i].id + `</td>` +
                     `<td>` + formatDate2(stocks[i].added_date) + `</td>` +
-                    `<td>` + stocks[i].added_by + `</td>` +
                     `<td>` + formatDate2(stocks[i].last_updated_date) + `</td>` +
-                    `<td>` + stocks[i].updated_by + `</td>` +
-                    `<td>` + stocks[i].initial_weight + `</td>` +
-                    `<td>` + stocks[i].current_weight + `</td>` +
-                    `<td>` + stocks[i].type + `</td>` +
-                    `<td>` + stocks[i].type_description + `</td>` +
-                    `<td> ₱` + stocks[i].current_price.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') + `</td>` +
-                    `<td>` + formatDate2(stocks[i].current_price_last_updated_date) + `</td>` +
-                    `<td>` + stocks[i].remarks + `</td>`+
+                    `<td>` + stocks[i].initial_weight.toFixed(2) + `</td>` +
+                    `<td>` + stocks[i].estimated_current_weight.toFixed(2) + `</td>` +
+                    `<td>` + stocks[i].age_by_days + `</td>` + //age by days
+                    `<td>` + stocks[i].description + `</td>` + //description
+                    `<td>` + stocks[i].status_description + `</td>` + //description
                     `<td style="text-align:center">
                       <button type="button" id=`+stocks[i].id+`|`+stocks[i].added_date+` class="btn btn-secondary btn-gen-qr" data-toggle="tooltip" data-placement="top" title="Generate QR">
                         <span class="material-symbols-outlined">
@@ -47,6 +45,7 @@ $(document).ready(function(){
 
     }else{
       $('#btn-modal-footer-copy-img').attr('value', url);
+      $('#btn-modal-footer-copy-img').attr('name', idArr[0]);
       $('#img-QR').attr('src', url);
       $("#qrCode").modal('show');
     }
@@ -64,10 +63,11 @@ $(document).ready(function(){
 
   $("#btn-modal-footer-copy-img").click(function(){
     var url = $(this).val();
+    var id = $(this).attr("name");
     console.log(url)
     $('.toast').toast({delay: 2000});
     $('.toast').toast('show');
-    copyImage(url)
+    copyImage(url,id)
     
   })
 
@@ -199,7 +199,7 @@ var generateQR = function (stockID,dateAdded){
       success : function(req) {
           var ret = JSON.parse(JSON.stringify(req))
           url = ret.data.url
-          copyImage(url)
+          copyImage(url,stockID)
           
       },
       error : function(){
@@ -210,7 +210,7 @@ var generateQR = function (stockID,dateAdded){
   return url
 }
 
-function imageToBlob(imageURL) {
+function imageToBlob(imageURL,label) {
   const img = new Image;
   const c = document.createElement("canvas");
   const ctx = c.getContext("2d");
@@ -221,18 +221,21 @@ function imageToBlob(imageURL) {
       c.width = this.naturalWidth;
       c.height = this.naturalHeight;
       ctx.drawImage(this, 0, 0);
+      ctx.font = '30px serif';
+      ctx.fillText('#'+ label, c.width / 2.5, c.height);
       c.toBlob((blob) => {
         // here the image is a blob
         resolve(blob)
       }, "image/png", 0.75);
+      
     };
   })
 }
 
-async function copyImage(imageURL){
+async function copyImage(imageURL,label){
 
-  const blob = await imageToBlob(imageURL)
-  const item = new ClipboardItem({ "image/png": blob });
+  var blob = await imageToBlob(imageURL,label)
+  var item = new ClipboardItem({"image/png": blob});                   
   navigator.clipboard.write([item]);
 
   
