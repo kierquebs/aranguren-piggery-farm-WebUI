@@ -20,7 +20,7 @@ $(document).ready(function(){
     }
   })
 
-    $("#btn-submit-new-stock" ).click(function(){
+  $("#btn-submit-new-stock" ).click(function(){
       var old = $('#initial_day_old').val();
       var weight = $('#initial_weight').val();
       console.log("old", old)
@@ -45,40 +45,48 @@ $(document).ready(function(){
       }
 
 
-      $.ajax({
-          url: API+'/stock/Create',
-          type: 'post',
-          dataType: 'json',
-          async:false,
-          data :{ initial_weight: weight,
-                  initial_day_old: old
-          },
-          success : function(req) {
-            console.log(JSON.parse(JSON.stringify(req)))
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'New stock has been added!',
-              showConfirmButton: false,
-              timer: 1500
-            })
-
-            ListAllStock();
-            $("#addNewStockModal").modal('hide');
-            $('#initial_day_old').val("");
-            $('#initial_weight').val("");
-              
-          },
-          error : function(){
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Something went wrong. Please try again.'
-            })
-            return
-          }
+    $.ajax({
+        url: API+'/stock/Create',
+        type: 'post',
+        dataType: 'json',
+        async:false,
+        data :{ initial_weight: weight,
+                initial_day_old: old
+        },
+        success : function(req) {
+         
+          $("#addNewStockModal").modal('hide');
+          $('#initial_day_old').val("");
+          $('#initial_weight').val("");
           
-        });
+
+          console.log(JSON.parse(JSON.stringify(req)))
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'New stock has been added!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          
+          var delayInMilliseconds = 1500; //1.5 second
+          
+          setTimeout(function() {
+            ListAllStock();
+          }, delayInMilliseconds);
+        },
+        error : function(){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong. Please try again.'
+          })
+          
+          return
+        }
+       
+        
+    });
     
   })
 
@@ -87,7 +95,7 @@ $(document).ready(function(){
     $.ajax({
       url: API+ '/stock/ListAll',
       type: 'get',
-      async:true,
+      async:false,
       success : function(req) {
         var stocks = JSON.parse(JSON.stringify(req));
         var html = "";
