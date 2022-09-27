@@ -93,6 +93,7 @@ $(document).ready(function(){
               showConfirmButton: false,
               timer: 1500
             })
+            $("#addNewStockModal").modal('hide');
               
           },
           error : function(){
