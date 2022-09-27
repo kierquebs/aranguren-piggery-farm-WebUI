@@ -292,7 +292,7 @@ function imageToBlob(imageURL,label) {
 async function copyImage(imageURL,label){
 
   var blob = await imageToBlob(imageURL,label)
-  var item = new ClipboardItem({"image/png": blob});                   
+  var item = new ClipboardItem({ "image/png": blob });                   
   navigator.clipboard.write([item]);
 
   
