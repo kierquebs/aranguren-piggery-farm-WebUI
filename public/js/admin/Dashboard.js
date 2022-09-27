@@ -2,39 +2,8 @@ var API = 'https://app-5609cb46-7bb7-4ea3-9258-b20b3bf65b1a.cleverapps.io/API'
 
 $(document).ready(function(){
 
-  $.ajax({
-	  url: API+ '/stock/ListAll',
-    type: 'get',
-    async:false,
-    success : function(req) {
-      var stocks = JSON.parse(JSON.stringify(req));
-      var html = "";
-      for (let i = 0; i < stocks.length; i++) {
-
-        html += `<tr>`+
-                    `<td>` + stocks[i].id + `</td>` +
-                    `<td>` + formatDate2(stocks[i].added_date) + `</td>` +
-                    `<td>` + formatDate2(stocks[i].last_updated_date) + `</td>` +
-                    `<td>` + stocks[i].initial_weight.toFixed(2) + `</td>` +
-                    `<td>` + stocks[i].estimated_current_weight.toFixed(2) + `</td>` +
-                    `<td>` + stocks[i].age_by_days + `</td>` + //age by days
-                    `<td>` + stocks[i].description + `</td>` + //description
-                    `<td>` + stocks[i].status_description + `</td>` + //description
-                    `<td style="text-align:center">
-                      <button type="button" id=`+stocks[i].id+`|`+stocks[i].added_date+` class="btn btn-secondary btn-gen-qr" data-toggle="tooltip" data-placement="top" title="Generate QR">
-                        <span class="material-symbols-outlined">
-                          qr_code_2
-                        </span>
-                      </button>
-                    </td>`;
-      }
-      document.getElementById("table_data").innerHTML = html;
-    },
-    error : function(){
-
-    }
-  });
-
+  
+  ListAllStock();
 
   $(".btn-gen-qr").click(function(){
     var id = $(this).attr("id");
@@ -93,7 +62,11 @@ $(document).ready(function(){
               showConfirmButton: false,
               timer: 1500
             })
+
+            ListAllStock();
             $("#addNewStockModal").modal('hide');
+            $('#initial_day_old').val("");
+            $('#initial_weight').val("");
               
           },
           error : function(){
@@ -108,6 +81,42 @@ $(document).ready(function(){
         });
     
   })
+
+
+  function ListAllStock(){
+    $.ajax({
+      url: API+ '/stock/ListAll',
+      type: 'get',
+      async:true,
+      success : function(req) {
+        var stocks = JSON.parse(JSON.stringify(req));
+        var html = "";
+        for (let i = 0; i < stocks.length; i++) {
+  
+          html += `<tr>`+
+                      `<td>` + stocks[i].id + `</td>` +
+                      `<td>` + formatDate2(stocks[i].added_date) + `</td>` +
+                      `<td>` + formatDate2(stocks[i].last_updated_date) + `</td>` +
+                      `<td>` + stocks[i].initial_weight.toFixed(2) + `</td>` +
+                      `<td>` + stocks[i].estimated_current_weight.toFixed(2) + `</td>` +
+                      `<td>` + stocks[i].age_by_days + `</td>` + //age by days
+                      `<td>` + stocks[i].description + `</td>` + //description
+                      `<td>` + stocks[i].status_description + `</td>` + //description
+                      `<td style="text-align:center">
+                        <button type="button" id=`+stocks[i].id+`|`+stocks[i].added_date+` class="btn btn-secondary btn-gen-qr" data-toggle="tooltip" data-placement="top" title="Generate QR">
+                          <span class="material-symbols-outlined">
+                            qr_code_2
+                          </span>
+                        </button>
+                      </td>`;
+        }
+        document.getElementById("table_data").innerHTML = html;
+      },
+      error : function(){
+  
+      }
+    });
+  }
 
 
 
@@ -240,9 +249,6 @@ function isNumberKey(txt, evt) {
   return true;
 }
 
-
-
-
 var generateQR = function (stockID,dateAdded){
   var url = null;
   $.ajax({
@@ -298,8 +304,6 @@ async function copyImage(imageURL,label){
   
 }
 
-
-
 function loadClassification(){
   $.ajax({
       url: API+'/classification/ListAll',
@@ -315,9 +319,6 @@ function loadClassification(){
       
   });
 }
-
-
-
 
 // Format: [yyyy-mm-dd]
 function formatDate(date) {
