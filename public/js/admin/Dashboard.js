@@ -49,6 +49,62 @@ $(document).ready(function(){
       $('#img-QR').attr('src', url);
       $("#qrCode").modal('show');
     }
+  })
+
+    $("#btn-submit-new-stock" ).click(function(){
+      var old = $('#initial_day_old').val();
+      var weight = $('#initial_weight').val();
+      console.log("old", old)
+      console.log("weight", weight)
+   
+      if (weight == "" || weight == null || weight <= 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please enter initial weight!'
+        })
+        return
+      }
+
+      if (old == "" || old == null || old <= 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Please enter initial days old!'
+        })
+        return
+      }
+
+
+      $.ajax({
+          url: API+'/stock/Create',
+          type: 'post',
+          dataType: 'json',
+          async:false,
+          data :{ initial_weight: weight,
+                  initial_day_old: old
+          },
+          success : function(req) {
+            console.log(JSON.parse(JSON.stringify(req)))
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'New stock has been added!',
+              showConfirmButton: false,
+              timer: 1500
+            })
+              
+          },
+          error : function(){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Something went wrong. Please try again.'
+            })
+            return
+          }
+          
+        });
     
   })
 
@@ -288,5 +344,3 @@ function formatDate2(date) {
 
   return [month, day, year].join('/');
 }
-
-
