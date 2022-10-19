@@ -1,0 +1,26 @@
+name: reviewdog
+on: [pull_request]
+jobs:
+  # Enable cache of golangci-lint result, go build and go dependencies
+  with_cache:
+    name: runner / golangci-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: go mod tidy
+        run: |
+          go mod tidy
+          output=$(git status -s) && if [ ${#output} -eq 0 ]; then echo "SUCCESS: go.mod is tidy"; else echo "FAILED: run 'go mod tidy'"; echo "$(git status -vv)"; exit 1; fi
+
+      - name: golangci-lint
+        uses: reviewdog/action-golangci-lint@v2.2.2
+        with:
+          tool_name: golangci-lint
+          golangci_lint_version: v1.50.0
+          reviewdog_version: v0.14.1
+          go_version: "1.18"
+          # we're not having reviewdog cache for us because we're caching across multiple actions here
+          cache: false
+          level: error
+          fail_on_error: true
+          reporter: github-pr-review
+          filter_mode: diff_context
