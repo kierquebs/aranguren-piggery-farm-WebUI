@@ -5,6 +5,6 @@ import (
 )
 
 func Dashboard(c *fiber.Ctx) error {
-	return c.Render("Dashboards", fiber.Map{})
+	return c.Render("Dashboardsss", fiber.Map{})
 
 }
