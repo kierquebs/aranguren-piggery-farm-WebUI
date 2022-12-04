@@ -24,7 +24,7 @@ function Login(user, pass){
       switch(dta.responseCode){
         case 200:
           Swal.fire({
-            position: 'top-end',
+            position: 'center',
             icon: 'success',
             title: 'Logged In!',
             showConfirmButton: false,
@@ -36,16 +36,17 @@ function Login(user, pass){
         break;
         case 400:
           Swal.fire({
-            position: 'top-end',
+            position: 'center',
             icon: 'error',
             title: 'Error login!',
+            text:dta.message,
             showConfirmButton: false, 
             timer: 1500
           })
         break;
         case 500:
           Swal.fire({
-            position: 'top-end',
+            position: 'center',
             icon: 'error',
             title: 'Error login!',
             text:dta.message,
