@@ -34,6 +34,7 @@ func main() {
 	app.Static("/", "./public")
 	app.Static("/admin", "./public")
 	app.Static("/admin/dashboard", "./public")
+	app.Static("/admin/purchase-history", "./public")
 
 	setup.Routes(app)
 	app.Use(cors.New())

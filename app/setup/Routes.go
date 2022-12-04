@@ -11,8 +11,9 @@ import (
 func Routes(app *fiber.App) {
 
 	adminGroup := app.Group("/admin", logger.New())
-	adminGroup.Get("/dashboard/:token", admin.Dashboard) // /admin/dashboard
-	adminGroup.Get("/login", admin.Login)                // /admin/dashboard
+	adminGroup.Get("/dashboard/:token", admin.Dashboard)              // /admin/dashboard
+	adminGroup.Get("/purchase-history/:token", admin.PurchaseHistory) // /admin/purchase-history
+	adminGroup.Get("/login", admin.Login)                             // /admin/dashboard
 
 	indexGroup := app.Group("/", logger.New())
 	indexGroup.Get("/", client.Index)

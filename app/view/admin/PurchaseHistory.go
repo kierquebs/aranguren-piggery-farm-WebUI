@@ -7,11 +7,11 @@ import (
 	"github.com/kierquebs/aranguren-piggery-farm-WebUI/app/controller/token"
 )
 
-func Dashboard(c *fiber.Ctx) error {
+func PurchaseHistory(c *fiber.Ctx) error {
 	t := c.Params("token")
 	fmt.Println(token.Validate(t))
 	if token.Validate(t) {
-		return c.Render("Dashboard", fiber.Map{
+		return c.Render("Purchase History", fiber.Map{
 			"token": t,
 		})
 	}
