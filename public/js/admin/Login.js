@@ -30,8 +30,9 @@ function Login(user, pass){
             showConfirmButton: false,
             timer: 1500
           })
-          localStorage.setItem("userToken",dta.data.Token)
-          $(location).prop('href', UI+'admin/dashboard')
+          
+          
+          $(location).prop('href', UI+'admin/dashboard/'+dta.data.Token)
         break;
         case 400:
           Swal.fire({
