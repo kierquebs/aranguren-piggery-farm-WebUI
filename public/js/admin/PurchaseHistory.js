@@ -57,6 +57,8 @@ $(document).ready(function(){
       success : function(req) {
         var purchases = JSON.parse(JSON.stringify(req));
         var html = "";
+        var ppk = purchases.data[0].price_per_kilo
+        var total = 0
         for (let i = 0; i < purchases.data[0].pigs.length; i++) {
           
           html += `<tr>`+
@@ -64,7 +66,21 @@ $(document).ready(function(){
                       `<td style="text-align:center">` + formatDate2(purchases.data[0].pigs[i].added_date) + `</td>` +
                       `<td style="text-align:center">` + purchases.data[0].pigs[i].initial_weight.toFixed(2) + `</td>` +
                       `<td style="text-align:center">` + purchases.data[0].pigs[i].final_weight.toFixed(2) + `</td>`;
+                      
+          
+          total += ppk * purchases.data[0].pigs[i].final_weight.toFixed(2)
+
         }
+        html += `<tr style="
+                    position: sticky;
+                    bottom: 0;
+                    background: white;
+                    z-index: 9999999;
+                ">`+
+        `<td style="text-align:center">Total Purchased Amount:</td>` +
+        `<td style="text-align:center"></td>` +
+        `<td style="text-align:center"></td>` +
+        `<td style="text-align:center">` + total.toLocaleString() +`</td>`;
         document.getElementById("modal_table_data_pigs").innerHTML = html;
         $("#pigs_list").modal('show');
       },
