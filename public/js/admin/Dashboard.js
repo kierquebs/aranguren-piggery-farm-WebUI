@@ -104,12 +104,10 @@ $(document).ready(function(){
           html += `<tr>`+
                       `<td>` + stocks[i].id + `</td>` +
                       `<td>` + formatDate2(stocks[i].added_date) + `</td>` +
-                      `<td>` + formatDate2(stocks[i].last_updated_date) + `</td>` +
                       `<td>` + stocks[i].initial_weight.toFixed(2) + `</td>` +
                       `<td>` + stocks[i].estimated_current_weight.toFixed(2) + `</td>` +
                       `<td>` + stocks[i].age_by_days + `</td>` + //age by days
                       `<td>` + stocks[i].description + `</td>` + //description
-                      `<td>` + stocks[i].status_description + `</td>` + //description
                       `<td style="text-align:center">
                         <button type="button" id=`+stocks[i].id+`|`+stocks[i].added_date+` class="btn btn-secondary btn-gen-qr" data-toggle="tooltip" data-placement="top" title="Generate QR">
                           <span class="material-symbols-outlined">
