@@ -2,7 +2,7 @@ var API = 'https://app-5609cb46-7bb7-4ea3-9258-b20b3bf65b1a.cleverapps.io/API'
 
 $(document).ready(function(){
 
-  
+
   ListAllStock();
 
   $(".btn-gen-qr").click(function(){
@@ -102,12 +102,12 @@ $(document).ready(function(){
         for (let i = 0; i < stocks.length; i++) {
   
           html += `<tr>`+
-                      `<td>` + stocks[i].id + `</td>` +
-                      `<td>` + formatDate2(stocks[i].added_date) + `</td>` +
-                      `<td>` + stocks[i].initial_weight.toFixed(2) + `</td>` +
-                      `<td>` + stocks[i].estimated_current_weight.toFixed(2) + `</td>` +
-                      `<td>` + stocks[i].age_by_days + `</td>` + //age by days
-                      `<td>` + stocks[i].description + `</td>` + //description
+                      `<td style="text-align:center">` + stocks[i].id + `</td>` +
+                      `<td style="text-align:center">` + formatDate2(stocks[i].added_date) + `</td>` +
+                      `<td style="text-align:center">` + stocks[i].initial_weight.toFixed(2) + `</td>` +
+                      `<td style="text-align:center">` + stocks[i].estimated_current_weight.toFixed(2) + `</td>` +
+                      `<td style="text-align:center">` + stocks[i].age_by_days + `</td>` + //age by days
+                      `<td style="text-align:center">` + stocks[i].description + `</td>` + //description
                       `<td style="text-align:center">
                         <button type="button" id=`+stocks[i].id+`|`+stocks[i].added_date+` class="btn btn-secondary btn-gen-qr" data-toggle="tooltip" data-placement="top" title="Generate QR">
                           <span class="material-symbols-outlined">

@@ -27,11 +27,11 @@ $(document).ready(function(){
         for (let i = 0; i < purchases.data.length; i++) {
           
           html += `<tr>`+
-                      `<td>` + purchases.data[i].ref_id + `</td>` +
-                      `<td>` + formatDate2( purchases.data[i].trn_date) + `</td>` +
-                      `<td>` +  purchases.data[i].first_name + " " +   purchases.data[i].middle_name + " " +  purchases.data[i].last_name + `</td>` +
-                      `<td>` +  purchases.data[i].price_per_kilo.toFixed(2) + `</td>` +
-                      `<td>` +  purchases.data[i].mobile_no + `</td>` + 
+                      `<td style="text-align:center">` + purchases.data[i].ref_id + `</td>` +
+                      `<td style="text-align:center">` + formatDate2( purchases.data[i].trn_date) + `</td>` +
+                      `<td style="text-align:center">` +  purchases.data[i].first_name + " " +   purchases.data[i].middle_name + " " +  purchases.data[i].last_name + `</td>` +
+                      `<td style="text-align:center">` +  purchases.data[i].price_per_kilo.toFixed(2) + `</td>` +
+                      `<td style="text-align:center">` +  purchases.data[i].mobile_no + `</td>` + 
                       `<td style="text-align:center">
                         <button type="button" id=`+ purchases.data[i].ref_id +`|`+ purchases.data[i].trn_date+` class="btn btn-secondary btn-action" data-toggle="tooltip" data-placement="top" title="View more details">
                           <span class="material-symbols-outlined">
@@ -59,10 +59,10 @@ $(document).ready(function(){
         for (let i = 0; i < purchases.data[0].pigs.length; i++) {
           console.log(purchases.data[0].pigs[i].id,purchases.data[0].pigs[i].added_date,purchases.data[0].pigs[i].initial_weight)
           html += `<tr>`+
-                      `<td>` + purchases.data[0].pigs[i].id + `</td>` +
-                      `<td>` + formatDate2(purchases.data[0].pigs[i].added_date) + `</td>` +
-                      `<td>` + purchases.data[0].pigs[i].initial_weight.toFixed(2) + `</td>` +
-                      `<td>` + purchases.data[0].pigs[i].final_weight.toFixed(2) + `</td>`;
+                      `<td style="text-align:center">` + purchases.data[0].pigs[i].id + `</td>` +
+                      `<td style="text-align:center">` + formatDate2(purchases.data[0].pigs[i].added_date) + `</td>` +
+                      `<td style="text-align:center">` + purchases.data[0].pigs[i].initial_weight.toFixed(2) + `</td>` +
+                      `<td style="text-align:center">` + purchases.data[0].pigs[i].final_weight.toFixed(2) + `</td>`;
         }
         document.getElementById("modal_table_data_pigs").innerHTML = html;
         $("#pigs_list").modal('show');
