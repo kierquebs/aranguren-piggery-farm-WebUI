@@ -25,13 +25,14 @@ $(document).ready(function(){
         console.log(purchases)
         var html = "";
         for (let i = 0; i < purchases.data.length; i++) {
-          
+          var pig_quantity = purchases.data[i].pigs.length;
           html += `<tr>`+
                       `<td style="text-align:center">` + purchases.data[i].ref_id + `</td>` +
                       `<td style="text-align:center">` + formatDate2( purchases.data[i].trn_date) + `</td>` +
                       `<td style="text-align:center">` +  purchases.data[i].first_name + " " +   purchases.data[i].middle_name + " " +  purchases.data[i].last_name + `</td>` +
-                      `<td style="text-align:center">` +  purchases.data[i].price_per_kilo.toFixed(2) + `</td>` +
                       `<td style="text-align:center">` +  purchases.data[i].mobile_no + `</td>` + 
+                      `<td style="text-align:center">` +  purchases.data[i].price_per_kilo.toFixed(2) + `</td>` +
+                      `<td style="text-align:center">` +  pig_quantity + `</td>` +
                       `<td style="text-align:center">
                         <button type="button" id=`+ purchases.data[i].ref_id +`|`+ purchases.data[i].trn_date+` class="btn btn-secondary btn-action" data-toggle="tooltip" data-placement="top" title="View more details">
                           <span class="material-symbols-outlined">
@@ -57,7 +58,7 @@ $(document).ready(function(){
         var purchases = JSON.parse(JSON.stringify(req));
         var html = "";
         for (let i = 0; i < purchases.data[0].pigs.length; i++) {
-          console.log(purchases.data[0].pigs[i].id,purchases.data[0].pigs[i].added_date,purchases.data[0].pigs[i].initial_weight)
+          
           html += `<tr>`+
                       `<td style="text-align:center">` + purchases.data[0].pigs[i].id + `</td>` +
                       `<td style="text-align:center">` + formatDate2(purchases.data[0].pigs[i].added_date) + `</td>` +
