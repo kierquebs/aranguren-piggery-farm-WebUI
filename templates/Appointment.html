@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Aranguren Piggery Farm | Purchase History</title>
+    <title>Aranguren Piggery Farm | Appointment</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -39,7 +39,7 @@
     <script src="js/jquery-3.6.1.min.js"></script>
 
      <!-- Custom functional scripts for this page-->
-     <script src="js/admin/PurchaseHistory.js"></script>
+     <script src="js/admin/Appointment.js"></script>
      <!-- <script>
         function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
@@ -135,7 +135,7 @@
             <hr class="sidebar-divider">
 
              <!-- Nav Item - Purchase History -->
-             <li class="nav-item active">
+             <li class="nav-item">
                 <a class="nav-link" id="nav-purchase-history" href="/admin/purchase-history/{{.token}}">
                     <i class="fas fa-fw fa-cash-register"></i>
                     <span>Purchase History</span></a>
@@ -144,12 +144,15 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Appointment -->
-            <li class="nav-item">
+             <!-- Nav Item - Purchase History -->
+             <li class="nav-item active">
                 <a class="nav-link" id="nav-purchase-history" href="/admin/appointment/{{.token}}">
-                    <i class="fas fa-fw fa-calendar"></i>
+                    <i class="fas fa-fw fa-cash-register"></i>
                     <span>Appointment</span></a>
             </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
             <!-- Heading -->
             <!-- <div class="sidebar-heading">
