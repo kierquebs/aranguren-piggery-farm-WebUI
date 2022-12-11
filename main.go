@@ -33,6 +33,7 @@ func main() {
 	// Serve files from "./public/static/resources" directory
 	app.Static("/", "./public")
 	app.Static("/admin", "./public")
+	app.Static("/client", "./public")
 	app.Static("/admin/dashboard", "./public")
 	app.Static("/admin/purchase-history", "./public")
 
