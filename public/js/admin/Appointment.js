@@ -103,7 +103,29 @@ $(document).ready(function(){
             }
             });
     }
+
+    $("#btn-add-appointment").click(function(){
+        $("#addAppointmentModal").modal('show');
+    })
+
+    $("#btn-submit-new-appointment").click(function(){
+        var $form = $("#form-add-appointment");
+        var data = getFormData($form);
+        createAppointment(data)
+    })
+      
 });
+
+function getFormData($form){
+    var unindexed_array = $form.serializeArray();
+    var indexed_array = {};
+
+    $.map(unindexed_array, function(n, i){
+        indexed_array[n['name']] = n['value'];
+    });
+
+    return indexed_array;
+}
 
 function cancelAppointment(id){
     $.ajax({
@@ -137,6 +159,55 @@ function cancelAppointment(id){
         },
         error : function(){
         }
+    });
+}
+
+function createAppointment(data){
+    $.ajax({
+        url: API+'/appointment/Create',
+        type: 'post',
+        dataType: 'json',
+        async:false,
+        data :data,
+        success : function(req) {
+            var dta = JSON.parse(JSON.stringify(req))
+            $("#addAppointmentModal").modal('hide');
+
+            switch(dta.responseCode){
+                case 200:
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: dta.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                  listAppointments();
+                break;
+                case 500:
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error',
+                    text:dta.message,
+                    showConfirmButton: false, 
+                    timer: 1500
+                  })
+                break;
+              }
+        
+        },
+        error : function(){
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong. Please try again.'
+          })
+          
+          return
+        }
+       
+        
     });
 }
 
