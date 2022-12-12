@@ -423,8 +423,28 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Information of Pigs</h1>
+                    <div style="
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 24.5px;
+                        ">
+    
+                        <h1 class="h3 mb-0 text-gray-800">Information of pigs</h1>
+       
+                        <a href="#" id="btn-add-stock" style="
+                        position: fixed;
+                        right:0;
+                        bottom:0;
+                        margin: 30px;
+                        z-index: 999;
+                        text-shadow: black;
+                        /* shape-outside: border-box; */
+                        box-shadow: 6px 6px 7px 0px #695757;
+                    " class="btn btn-primary btn-circle btn-lg">
+                            <i class="fa fa-plus"></i>
+                        </a>
+       
                     </div>
                 
                     <!-- Content Row -->
@@ -482,9 +502,6 @@
                      <!-- Page Heading -->
                      <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"></h1>
-                        <a href="#" id="btn-add-stock" class="btn btn-primary btn-circle btn-lg">
-                            <i class="fa fa-plus"></i>
-                        </a>
                     </div>
 
 
@@ -510,10 +527,10 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
+    <!-- Scroll to Top Button
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
-    </a>
+    </a> -->
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -523,7 +540,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <!-- <span aria-hidden="true">×</span> -->
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
@@ -542,7 +559,7 @@
             <div class="modal-header">
             <h5 class='modal-title text-center' id="exampleModalLongTitle">Generated QR</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                <!-- <span aria-hidden="true">&times;</span> -->
             </button>
             </div>
             <div class="modal-body">
@@ -576,11 +593,10 @@
     <div class="modal fade" id="addNewStockModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <form id="form-add-stock" >
                 <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add New Stock</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <!-- <span aria-hidden="true">&times;</span> -->
                 </button>
                 </div>
                 <div class="modal-body">
@@ -599,10 +615,9 @@
                         <button type="button" id="btn-submit-new-stock" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
-            </form>
           </div>
         </div>
-      </div>
+    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -617,9 +632,6 @@
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 
