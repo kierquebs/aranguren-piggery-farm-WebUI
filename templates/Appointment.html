@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Aranguren Piggery Farm | Purchase History</title>
+    <title>Aranguren Piggery Farm | Appointment</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -39,7 +39,18 @@
     <script src="js/jquery-3.6.1.min.js"></script>
 
      <!-- Custom functional scripts for this page-->
-     <script src="js/admin/PurchaseHistory.js"></script>
+     
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.33/dist/sweetalert2.all.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
+    <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tooltip.js@1.3.3/dist/umd/tooltip.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <script src="js/admin/Appointment.js"></script>
+
+
      <!-- <script>
         function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
@@ -60,6 +71,104 @@
     }
   }
      </script> -->
+     <style>
+        .popper,
+.tooltip {
+  position: absolute;
+  z-index: 9999;
+  background: #FFC107;
+  color: black;
+  width: 150px;
+  border-radius: 3px;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  padding: 10px;
+  text-align: center;
+}
+.style5 .tooltip {
+  background: #1E252B;
+  color: #FFFFFF;
+  max-width: 200px;
+  width: auto;
+  font-size: .8rem;
+  padding: .5em 1em;
+}
+.popper .popper__arrow,
+.tooltip .tooltip-arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  position: absolute;
+  margin: 5px;
+}
+
+.tooltip .tooltip-arrow,
+.popper .popper__arrow {
+  border-color: #FFC107;
+}
+.style5 .tooltip .tooltip-arrow {
+  border-color: #1E252B;
+}
+.popper[x-placement^="top"],
+.tooltip[x-placement^="top"] {
+  margin-bottom: 5px;
+}
+.popper[x-placement^="top"] .popper__arrow,
+.tooltip[x-placement^="top"] .tooltip-arrow {
+  border-width: 5px 5px 0 5px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  bottom: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.popper[x-placement^="bottom"],
+.tooltip[x-placement^="bottom"] {
+  margin-top: 5px;
+}
+.tooltip[x-placement^="bottom"] .tooltip-arrow,
+.popper[x-placement^="bottom"] .popper__arrow {
+  border-width: 0 5px 5px 5px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  top: -5px;
+  left: calc(50% - 5px);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.tooltip[x-placement^="right"],
+.popper[x-placement^="right"] {
+  margin-left: 5px;
+}
+.popper[x-placement^="right"] .popper__arrow,
+.tooltip[x-placement^="right"] .tooltip-arrow {
+  border-width: 5px 5px 5px 0;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  left: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+.popper[x-placement^="left"],
+.tooltip[x-placement^="left"] {
+  margin-right: 5px;
+}
+.popper[x-placement^="left"] .popper__arrow,
+.tooltip[x-placement^="left"] .tooltip-arrow {
+  border-width: 5px 0 5px 5px;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  right: -5px;
+  top: calc(50% - 5px);
+  margin-left: 0;
+  margin-right: 0;
+}
+     </style>
 
      <script>
 
@@ -135,7 +244,7 @@
             <hr class="sidebar-divider">
 
              <!-- Nav Item - Purchase History -->
-             <li class="nav-item active">
+             <li class="nav-item">
                 <a class="nav-link" id="nav-purchase-history" href="/admin/purchase-history/{{.token}}">
                     <i class="fas fa-fw fa-cash-register"></i>
                     <span>Purchase History</span></a>
@@ -145,7 +254,7 @@
             <hr class="sidebar-divider">
 
              <!-- Nav Item - Appointment -->
-             <li class="nav-item">
+             <li class="nav-item active">
                 <a class="nav-link" id="nav-appointment" href="/admin/appointment/{{.token}}">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>Appointment</span></a>
@@ -390,57 +499,15 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Purchase History</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Appointment</h1>
                     </div>
                 
                     <!-- Content Row -->
                     <div class="row">
+                        <div id='calendar'></div>
                     </div>
 
-                    <!-- Content Row -->
-
-                    <div class="row">
-
-                        <!-- Area Table -->
-                        <div class="col-xl-12 col-lg-12">
-                            <!-- DataTales Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <h6 class="m-0 font-weight-bold text-primary">List of Purchases</h6>
-                                        </div>
-                                        <div class="col-4">
-
-                                        </div>
-                                        <div class="col-4" style="text-align: end;">
-                                            <input type="search" id="myInputSearch" placeholder="Search..." class="form-control search-input" data-table="customers-list">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive" style="min-height:500px;max-height:500px">
-                                        <table class="table table-striped mt32 customers-list" id="purchase_table" width="100%" cellspacing="0" max-height="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th style="vertical-align: top;text-align: center;">Ref. ID</th>
-                                                    <th style="vertical-align: top;text-align: center;">Trn. Date</th>
-                                                    <th style="vertical-align: top;text-align: center;">Customer Name</th>
-                                                    <th style="vertical-align: top;text-align: center;">Mobile No.</th>
-                                                    <th style="vertical-align: top;text-align: center;">Price Per Kilo</th>
-                                                    <th style="vertical-align: top;text-align: center;">Quantity</th>
-                                                    <th style="vertical-align: top;text-align: center;">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="table_data">
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                      <!-- Page Heading -->
                      <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800"></h1>

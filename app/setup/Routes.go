@@ -13,6 +13,7 @@ func Routes(app *fiber.App) {
 	adminGroup := app.Group("/admin", logger.New())
 	adminGroup.Get("/dashboard/:token", admin.Dashboard)              // /admin/dashboard
 	adminGroup.Get("/purchase-history/:token", admin.PurchaseHistory) // /admin/purchase-history
+	adminGroup.Get("/appointment/:token", admin.Appointment)          // /admin/appointment
 	adminGroup.Get("/login", admin.Login)                             // /admin/dashboard
 
 	indexGroup := app.Group("/", logger.New())
