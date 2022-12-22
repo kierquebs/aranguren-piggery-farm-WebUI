@@ -34,7 +34,7 @@ func main() {
 	app.Static("/", "./public")
 	app.Static("/admin", "./public")
 	app.Static("/client", "./public")
-	app.Static("/admin/dashboard", "./public")
+	app.Static("/admin/information-of-pigs", "./public")
 	app.Static("/admin/purchase-history", "./public")
 	app.Static("/admin/appointment", "./public")
 
