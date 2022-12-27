@@ -42,7 +42,7 @@
     <script src="js/jquery-3.6.1.min.js"></script>
 
      <!-- Custom functional scripts for this page-->
-     <script src="js/admin/Dashboard.js"></script>
+     <script src="js/admin/InformationOfPigs.js"></script>
      <!-- <script>
         function myFunction() {
     var input, filter, table, tr, td, i, txtValue;
@@ -165,9 +165,19 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" id="nav-dashboard" href="/admin/dashboard/{{.token}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Information of Pigs -->
+            <li class="nav-item active">
+                <a class="nav-link" id="nav-dashboard" href="/admin/information-of-pigs/{{.token}}">
+                    <i class="fas fa-fw fa-info"></i>
                     <span>Information of Pigs</span></a>
             </li>
 
