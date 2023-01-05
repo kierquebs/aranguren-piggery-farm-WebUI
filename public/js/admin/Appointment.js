@@ -16,7 +16,8 @@ function listAppointments(){
             console.log("id:" + eventObj.extendedProps.ids)
             var message_body = '<b>Mobile Number: </b>' + eventObj.extendedProps.mobile +
                                '<br/><b>Email Address: </b>' + eventObj.extendedProps.email_address + 
-                               '<br/><br/><button type="button" id="'+ eventObj.extendedProps.ids +'" role="button" onClick="cancelAppointment(this.id)" tabindex="0" class="btn btn-danger cancel-appointment">Cancel Appointment</button>' 
+                               '<br/><br/><button type="button" id="'+ eventObj.extendedProps.ids +'" role="button" onClick="cancelAppointment(this.id)" tabindex="0" class="btn btn-danger cancel-appointment">Cancel</button> <span>   </span>'+
+                               '<button type="button" id="'+ eventObj.extendedProps.ids +'" role="button" onClick="doneAppointment(this.id)" tabindex="0" class="btn btn-success cancel-appointment">Done</button>'  
             Swal.fire({
                 position: 'center',
                 title: eventObj.title,
@@ -140,6 +141,41 @@ function cancelAppointment(id){
                     position: 'center',
                     icon: 'success',
                     title: 'Cancelled',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                  listAppointments();
+                break;
+                case 500:
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error',
+                    text:req.message,
+                    showConfirmButton: false, 
+                    timer: 1500
+                  })
+                break;
+              }
+        },
+        error : function(){
+        }
+    });
+}
+
+function doneAppointment(id){
+    $.ajax({
+        url: API + '/appointment/Delete/'+id,
+        type: 'post',
+        async:false,
+        success : function(req) {
+            var req = JSON.parse(JSON.stringify(req))
+            switch(req.responseCode){
+                case 200:
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Done',
                     showConfirmButton: false,
                     timer: 1500
                   })
