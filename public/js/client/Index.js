@@ -1,6 +1,9 @@
 var API = 'https://app-5609cb46-7bb7-4ea3-9258-b20b3bf65b1a.cleverapps.io/API'
 
 $(document).ready(function(){
+    document.getElementById("loginBtn").onclick = function () {
+        location.href = "https://app-60a5d999-64e1-4df9-b489-3791717d943a.cleverapps.io/admin/login";
+    };
 
     RequestContent();
 
