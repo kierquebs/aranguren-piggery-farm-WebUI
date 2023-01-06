@@ -20,6 +20,20 @@ $(document).ready(function(){
     }
   })
 
+  $("#btn-update-pig-price").click(function(){
+    Swal.fire({
+      title: "Update Pig Price",
+      text: "Input price:",
+      input: 'number',
+      showCancelButton: true        
+    }).then((result) => {
+        if (result.value) {
+            updatePrice(result.value)
+            console.log("Result: " + result.value);
+        }
+    });
+  })
+
   $("#btn-submit-new-stock" ).click(function(){
       var old = $('#initial_day_old').val();
       var weight = $('#initial_weight').val();
@@ -123,6 +137,46 @@ $(document).ready(function(){
       }
     });
   }
+
+
+  function updatePrice(val){
+    $.ajax({
+        url: API + '/web/Update',
+        type: 'post',
+        async:false,
+        data :{ 
+          title: "price",
+          value: val
+        },
+        success : function(req) {
+            var req = JSON.parse(JSON.stringify(req))
+            switch(req.responseCode){
+                case 200:
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Done',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                  listAppointments();
+                break;
+                case 500:
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Error',
+                    text:req.message,
+                    showConfirmButton: false, 
+                    timer: 1500
+                  })
+                break;
+              }
+        },
+        error : function(){
+        }
+    });
+}
 
 
 
